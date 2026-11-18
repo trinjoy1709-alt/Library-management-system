@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>Library Management System</h1>
+                <p class="subtitle">Catalog, Circulation & Inventory Portal</p>
+            </div>
+            <button id="resetBtn" class="btn btn-secondary">Reset Sample Data</button>
+        </header>
+
+        <!-- Inventory Stats -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Total Books</span>
+                <span id="totalBooksCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Available Copies</span>
+                <span id="availableBooksCount" class="stat-value text-green">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Issued Copies</span>
+                <span id="issuedBooksCount" class="stat-value text-amber">0</span>
+            </div>
+        </section>
+
+        <!-- Add Book Form -->
+        <section class="card">
+            <h2>Add New Book to Catalog</h2>
+            <form id="addBookForm" class="form-grid">
+                <input type="text" id="bookTitle" placeholder="Book Title" required>
+                <input type="text" id="bookAuthor" placeholder="Author Name" required>
+                <input type="text" id="bookIsbn" placeholder="ISBN (e.g. 978-0132350884)" required>
+                <input type="number" id="bookQty" placeholder="Quantity" min="1" value="1" required>
+                <button type="submit" class="btn btn-primary">Add Book</button>
+            </form>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section class="controls-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by title, author, ISBN, or borrower...">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="available">Available</button>
+                <button class="filter-btn" data-filter="issued">Issued</button>
+            </div>
+        </section>
+
+        <!-- Book Catalog Table -->
+        <section class="card table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title & ISBN</th>
+                            <th>Author</th>
+                            <th>Availability</th>
+                            <th>Active Borrowers</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookTableBody">
+                        <!-- Rows populated dynamically by app.js -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Issue Book Modal -->
+    <div id="issueModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalBookTitle">Issue Book</h2>
+            <form id="issueBookForm">
+                <input type="hidden" id="issueBookId">
+                <div class="form-group">
+                    <label for="borrowerName">Student / Member Name</label>
+                    <input type="text" id="borrowerName" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="borrowerId">Roll No / Member ID</label>
+                    <input type="text" id="borrowerId" placeholder="e.g. CSE-2025-042" required>
+                </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="closeModalBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm Issue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="library.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
